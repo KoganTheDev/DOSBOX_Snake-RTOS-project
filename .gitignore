@@ -96,3 +96,6 @@ CMakeUserPresets.json
 # Don`t upload the build folder nor VS code folder
 build
 .vscode
+
+# Ignore .exe files
+*.exe
