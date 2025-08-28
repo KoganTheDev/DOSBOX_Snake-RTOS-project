@@ -12,21 +12,30 @@ enum mouse_button
 	BOTH_MOUSE_BUTTONS = 3
 };
 
-union REGS inregs, outregs;
 
 void print_mouse_status(int button_status, int mouse_x, int mouse_y)
 {
 	printf("b = %d\nx = %d y = %d\n", button_status, mouse_x / 8, mouse_y / 8);
 }
 
+// --- Global variables ---
+union REGS inregs, outregs;
+
+// The specific interrupt to hook to.
+unsigned char interrupt_number = MOUSE_IRQ;
+
+int button_status;
+int mouse_x; // holds x coordinate of mouse
+int mouse_y; // holds y coordinate of mouse
+
 // Step 1: define a global variable to store the original interrupt handler
-void interrupt(*mouse_original_handler)(void);
+void interrupt (*mouse_original_handler)(void);
 
 // Step 2:  define a gloabal flag that our inrerrupt handler can change
 volatile int mouse_event_flag = 0;
 
 // Step 3: write the new interrupt handler
-void my_mouse_interrupt_handler(void)
+void interrupt my_mouse_interrupt_handler(void)
 {
 	// Firstly, chain to the original handler
 	mouse_original_handler();
@@ -36,13 +45,11 @@ void my_mouse_interrupt_handler(void)
 }
 
 int main()
-{
-	// The specific interrupt to hhot to.
-	unsigned char interrupt_number = MOUSE_IRQ;
-	printf("Statring mouse interrupt handler demo program\n");
-
+{ 
 	// Phase 1: install the new interrupt handler
-	original_mouse_handler = getvect(interrupt_number); //? Missing a type
+	mouse_original_handler = getvect(interrupt_number);
+
+	printf("Statring mouse interrupt handler demo program\n");
 
 	// set the interrupt vector to point to the new mouse handler
 	setvect(interrupt_number, my_mouse_interrupt_handler);
@@ -62,9 +69,9 @@ int main()
 			int86(MOUSE_SOFTWARE_INTERRUPT, &inregs, &outregs);
 
 			// Get the button satus, x & y coordinates from the output registers
-			int button_status = outregs.x.bx;
-			int mouse_x = outregs.x.cx;
-			int mouse_y = outregs.x.dx;
+			button_status = outregs.x.bx;
+			mouse_x = outregs.x.cx;
+			mouse_y = outregs.x.dx;
 
 			switch (button_status)
 			{
