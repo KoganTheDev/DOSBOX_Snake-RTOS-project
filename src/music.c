@@ -58,6 +58,18 @@ void playnote(int frequency, int duration)
     nosound(); // Stop playing the sound
 }
 
+// Play sound effect - used for a short burst of sound
+void play_sound(int sound[][2], int notes)
+{
+    int i;
+
+    for (i = 0; i < notes; i++)
+    {
+        playnote(sound[i][0], sound[i][1]);
+    }
+}
+
+// Plays a melody until a key is pressed.
 void play_melody(int melody[][2], int notes)
 {
     int i = 0;
@@ -68,6 +80,7 @@ void play_melody(int melody[][2], int notes)
     }
 }
 
+// Plays a melody for the welcome screen
 void play_welcome_message_melody()
 {
     // Welcome screen melody
@@ -97,7 +110,8 @@ void play_welcome_message_melody()
 	play_melody(melody, notes);
 }
 
-void play_thank_you_message_melody(void)
+// Plays a melody for the screen that is displayed when pressing ESC
+void play_thank_you_message_melody()
 {
     // Soothing end-game melody
     int melody[][2] = {
@@ -111,4 +125,55 @@ void play_thank_you_message_melody(void)
     };
     int notes = sizeof(melody) / sizeof(melody[0]);
 	play_melody(melody, notes);
+}
+
+void play_game_over_melody()
+{
+    // A peaceful, happy melody for the game over screen.
+    int melody[][2] = {
+        {NOTE_G5, QUARTER_NOTE},
+        {NOTE_E5, QUARTER_NOTE},
+        {NOTE_C5, HALF_NOTE},
+        {NOTE_A4, QUARTER_NOTE},
+        {NOTE_C5, HALF_NOTE}
+    };
+    int notes = sizeof(melody) / sizeof(melody[0]);
+    play_melody(melody, notes);
+}
+
+// Play a sound that is used when the snake eats the fruit
+void play_snake_eat_food_sound()
+{
+	// Snake eating food sound effect
+    int sound[][2] = {
+		{NOTE_C5, THIRTY_SECOND_NOTE}, {NOTE_A4, THIRTY_SECOND_NOTE},
+		{NOTE_G4, THIRTY_SECOND_NOTE}, {NOTE_E4, THIRTY_SECOND_NOTE},
+        {NOTE_C4, THIRTY_SECOND_NOTE}
+    };
+	int notes = sizeof(sound) / sizeof(sound[0]);
+	play_sound(sound, notes);
+}
+
+// Plays a sound that indicates a level up, making the game harder
+void play_level_up_sound()
+{
+    int sound[][2] = {
+        {NOTE_C5, EIGHTH_NOTE}, {NOTE_E5, EIGHTH_NOTE},
+        {NOTE_G5, EIGHTH_NOTE}, {NOTE_C6, EIGHTH_NOTE}
+    };
+    int notes = sizeof(sound) / sizeof(sound[0]);
+    play_sound(sound, notes);
+}
+
+// TODO: If we decide too, we must not allow the snake to collapse into itself, and if it does play this sound
+// Plays a sound when the snake hits a wall
+void play_snake_hits_a_wall_sound()
+{
+    int sound[][2] = {
+        {NOTE_E4, SIXTEENTH_NOTE},
+        {NOTE_F4, SIXTEENTH_NOTE},
+        {NO_NOTE, THIRTY_SECOND_NOTE} // A very short pause
+    };
+    int notes = sizeof(sound) / sizeof(sound[0]);
+	play_sound(sound, notes);
 }

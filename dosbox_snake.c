@@ -96,6 +96,24 @@ void update_display_buffer()
 }
 
 
+void print_welcome_message()
+{
+    clrscr(); // Clear the console (Turbo C function)
+
+    printf("\n\n\n");
+    printf("                *****************************************************\n");
+    printf("                *                                                   *\n");
+    printf("                *        WELCOME TO THE DOSBOX SNAKE GAME!          *\n");
+    printf("                *                                                   *\n");
+    printf("                *****************************************************\n");
+    printf("\n\n");
+    printf("                Use the arrow keys to control the snake.\n");
+    printf("                Press ESC to exit the game at any time.\n");
+    printf("                Press any key to start...\n");
+
+    play_welcome_message_melody(); // Play a simple melody until a key is pressed
+}
+
 // This function is used to gracefully terminate the program
 // it restores the original keyboard interrupt handler and then exits.
 void halt()
@@ -120,25 +138,6 @@ void halt()
 
 	play_thank_you_message_melody(); // Play a simple melody until a key is pressed
     exit(0); 
-}
-
-void print_welcome_message()
-{
-	clrscr(); // Clear the console (Turbo C function)
-
-    printf("\n\n\n");
-    printf("                *****************************************************\n");
-    printf("                *                                                   *\n");
-    printf("                *        WELCOME TO THE DOSBOX SNAKE GAME!          *\n");
-    printf("                *                                                   *\n");
-    printf("                *****************************************************\n");
-    printf("\n\n");
-    printf("                Use the arrow keys to control the snake.\n");
-    printf("                Press ESC to exit the game at any time.\n");
-    printf("                Press any key to start...\n");
-
-
-    play_welcome_message_melody(); // Play a simple melody until a key is pressed
 }
 
 // Spawns food at a random position not occupied by the snake.
