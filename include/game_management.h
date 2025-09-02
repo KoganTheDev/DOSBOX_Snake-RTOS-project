@@ -1,7 +1,5 @@
 #pragma once
 
-//! NOTE: To include this header use "#include <gane_m~1.h>", because fo DOSBOX`s limitations
-//! NOTE: Used header gaurds because the compiler dicides to reinclude this folder which causes multiple definitions
 #ifndef GAME_M~1_H
 #define GAME_M~1_h
 
@@ -28,12 +26,24 @@ extern int game_over; // Flag to indicate if the game is over
 
 extern char display[DISPLAY_ROWS * DISPLAY_COLS + DISPLAY_ROWS + 1]; // Main display buffer (25 rows x 40 columns + null terminator) 
 
+void clear_display_draft(); // Helper function - Clears the display draft by filling it with spaces.
+void update_display_buffer(); // Helper function - Copies the display draft to the main display buffer.
+void draw_game_elements(); // Draws the snake, food and the score on the display draft
 
+// --- MAIN LOOP FUNCTIONS ---
 
+void displayer(); // This function is responsible for rendering the game state to the console.
 
+// This function acts as a consumer for the keyboard input buffer.
+// It moves the characters from `entered_ascii_codes` to the `ch_arr` queue,
+// which is then processed by the `updater`.
+void receiver();
 
-void clear_display_draft(void);
-
+// This is the main game logic function. It performs the following tasks:
+// 1. Initializes the game state on the first run.
+// 2. Processes user input from the `ch_arr` queue to control the game.
+// TODO: after implementing full logic, add more documentation
+void updater();
 
 #endif
 

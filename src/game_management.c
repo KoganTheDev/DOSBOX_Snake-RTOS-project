@@ -11,10 +11,7 @@ int game_speed = 1000; // Game speed (delay in milliseconds)
 int game_over = 0; // Flag to indicate if the game is over
 
 
-
-
-// Helper function - Clears the display draft by filling it with spaces.
-void clear_display_draft(void)
+void clear_display_draft()
 {
     int i;
     int j;
@@ -28,7 +25,6 @@ void clear_display_draft(void)
     }
 }
 
-// Helper function - Copies the display draft to the main display buffer.
 void update_display_buffer()
 {
     int index = 0;
@@ -46,7 +42,6 @@ void update_display_buffer()
     display[index] = '\0'; // Null-terminate the string
 }
 
-// Draws the snake, food and the score on the display draft
 void draw_game_elements()
 {
     char score_text[20];
@@ -54,17 +49,7 @@ void draw_game_elements()
     int y;
     int i;
 
-    // Draw the snake
-    for (i = 0; i < snake.length; i++)
-    {
-        x = snake.body[i].x;
-        y = snake.body[i].y;
-
-        if (0 <= x && x < DISPLAY_COLS && 0 <= y && y < DISPLAY_ROWS)
-        {
-            display_draft[y][x] = (i == 0) ? '@' : '='; // Head is '@', body is '='
-        }
-    }
+    draw_snake();
 
     // TODO: Implement different sizes for the food for difficulty
     // Draw the food
@@ -80,18 +65,13 @@ void draw_game_elements()
     // TODO: Add timer and time display
 }
 
-// --- MAIN LOOP FUNCTIONS ---
 
-// This function is responsible for rendering the game state to the console.
-void displayer(void)
+void displayer()
 {
     clrscr();
     printf("%s", display); // Print the entire screen buffer
 }
 
-// This function acts as a consumer for the keyboard input buffer.
-// It moves the characters from `entered_ascii_codes` to the `ch_arr` queue,
-// which is then processed by the `updater`.
 void receiver()
 {
     int i = 0;
@@ -118,10 +98,7 @@ void receiver()
     tail = -1;
 }
 
-// This is the main game logic function. It performs the following tasks:
-// 1. Initializes the game state on the first run.
-// 2. Processes user input from the `ch_arr` queue to control the game.
-// TODO: after implementing full logic, add more documentation
+
 void updater()
 {
     // Initial setup for the first run of the game.
@@ -149,19 +126,4 @@ void updater()
     {
         print_game_over_screen();
     }
-}
-
-
-// This function is used to gracefully terminate the program
-// it restores the original keyboard interrupt handler and then exits.
-void halt()
-{
-
-
-    restore_keyboard_handler();
-
-    print_thank_you_message_screen();
-    clrscr(); // Clear the console (Turbo C function)
-
-    exit(0);
 }

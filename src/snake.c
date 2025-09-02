@@ -12,7 +12,6 @@ int front = -1; // Index of the front of the queue
 int rear = -1; // Index of the rear of the queue
 
 
-// Initializes the snake in the center of the display.
 void initialize_snake()
 {
     int start_x;
@@ -38,7 +37,6 @@ void initialize_snake()
 }
 
 // TODO: Implement collision detection with walls
-// Moves the snake in the current direction.
 void move_snake()
 {
     int i;
@@ -78,12 +76,12 @@ void move_snake()
         // Increase the length of the snake
         if (snake.length < SNAKE_MAX_LENGTH)
         {
+            snake.length++;
             for (i = snake.length; i > 0; i--)
             {
                 snake.body[i] = snake.body[i - 1];
             }
             snake.body[0] = *head;
-            snake.length++;
         }
 
         // Increase Score
@@ -97,7 +95,6 @@ void move_snake()
     }
 }
 
-// Update the direction from the input character if it is a valid direction change.
 void update_snake_direction()
 {
     if (front != -1 && rear >= front)
@@ -120,7 +117,6 @@ void update_snake_direction()
     }
 }
 
-// Draws the snake on the display draft.
 void draw_snake()
 {
     int i;
@@ -132,7 +128,22 @@ void draw_snake()
 
         if (0 <= x && x < DISPLAY_COLS && 0 <= y && y < DISPLAY_ROWS)
         {
-            display_draft[y][x] = (i == 0) ? '@' : '='; // Head is '@', body is '='
+            if (i == 0) // Head segment
+            {
+                display_draft[y][x] = '@';
+            }
+            else
+            {
+                // Change body segments according to the direction of movement
+                if (UP_ARROW == snake.direction || snake.direction == DOWN_ARROW) // Vertical movement
+                {
+                    display_draft[y][x] = '|'; // Head is '@', body is '|'
+                }
+                else // horizontal movement
+                {
+                    display_draft[y][x] =  '='; // Head is '@', body is '='
+                }
+            }
         }
     }
 }

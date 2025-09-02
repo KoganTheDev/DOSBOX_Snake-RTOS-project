@@ -39,7 +39,7 @@ void print_thank_you_message_screen()
     play_thank_you_message_melody(); // Play a simple melody until a key is pressed
 
     clrscr();
-    exit();
+    exit(0);
 }
 
 void print_game_over_screen()

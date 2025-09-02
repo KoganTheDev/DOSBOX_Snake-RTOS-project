@@ -22,4 +22,9 @@ extern int front; // Index of the front of the queue
 extern int rear; // Index of the rear of the queue
 
 
+void initialize_snake(); // Initializes the snake in the center of the display.
+void move_snake(); // Moves the snake in the current direction.
+void update_snake_direction(); // Update the direction from the input character if it is a valid direction change.
+void draw_snake(); // Draws the snake on the display draft.
+
 #endif

@@ -52,4 +52,4 @@ void play_level_up_sound(); // Plays a sound that indicates a level up, making t
 // Plays a sound when the snake hits a wall
 void play_snake_hits_a_wall_sound();
 
-#endif // !MUSIC_H
+#endif

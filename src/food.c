@@ -4,7 +4,6 @@
 
 POSITION food;
 
-// Spawns food at a random position not occupied by the snake.
 void spawn_food()
 {
     int i;
