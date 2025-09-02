@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef MUSIC_H
+#define MUSIC_H
+
 #include <dos.h>
 #include <conio.h>
 
@@ -48,3 +51,5 @@ void play_level_up_sound(); // Plays a sound that indicates a level up, making t
 // TODO: If we decide too, we must not allow the snake to collapse into itself, and if it does play this sound
 // Plays a sound when the snake hits a wall
 void play_snake_hits_a_wall_sound();
+
+#endif // !MUSIC_H
