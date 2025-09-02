@@ -4,7 +4,7 @@
 #include <dos.h>
 #include <conio.h>
 
-#include "src/music.c"
+#include "music.h"
 
 #define ARR_SIZE 1000
 #define DISPLAY_ROWS 25
