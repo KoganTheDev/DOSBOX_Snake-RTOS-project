@@ -8,7 +8,7 @@
 
 #define ARR_SIZE 1000
 #define DISPLAY_ROWS 25
-#define DISPLAY_COLS 80
+#define DISPLAY_COLS 40
 #define SNAKE_MAX_LENGTH 100
 #define KEYBOARD_HARDWARE_INTERRUPT 0x09
 
@@ -46,13 +46,13 @@ int game_speed = 1000; // Game speed (delay in milliseconds)
 int game_over = 0; // Flag to indicate if the game is over
 
 // A 2D array to serve as the drawing canvas for the game.
-// It represents a 25-row, 80-column console screen.
+// It represents a 25-row, 40-column console screen.
 char display_draft[DISPLAY_ROWS][DISPLAY_COLS];
 
 char entered_ascii_codes[ARR_SIZE]; // Buffer for raw ASCII codes from keyboard
 int tail = -1; // Index of the last entered ASCII code
 
-char display[DISPLAY_ROWS * DISPLAY_COLS + DISPLAY_ROWS + 1]; // Main display buffer (25 rows x 80 columns + null terminator) 
+char display[DISPLAY_ROWS * DISPLAY_COLS + DISPLAY_ROWS + 1]; // Main display buffer (25 rows x 40 columns + null terminator) 
 
 // A circular buffer for holding the processed keyboard commands.
 char ch_arr[ARR_SIZE];
@@ -126,7 +126,7 @@ void halt()
     
     clrscr(); // Clear the console (Turbo C function)
 
-    // Centered ASCII art message (fits 80 columns)
+    // Centered ASCII art message (fits 40 columns)
     printf("\n\n\n");
     printf("                *****************************************************\n");
     printf("                *                                                   *\n");
