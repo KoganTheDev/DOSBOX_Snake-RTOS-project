@@ -3,45 +3,50 @@
 #define STRSIZE 100
 
 /* Standard version */
-int palindrome_test(char* str, int* wrong_index1, int* wrong_index2)
+/* Counts the number of comparisons */
+int palindrome_test_version_2(char* str, int* wrong_index1, int* wrong_index2, int* total)
 {
 	int len = strlen(str);
 	int left_index = 0;
 	int right_index = len - 1;
+	*total = 0;
 
-	while (left_index <= right_index)
+	while (left_index < right_index)
 	{
+		(*total)++;
 		if (str[left_index] != str[right_index])
 		{
 			*wrong_index1 = left_index;
 			*wrong_index2 = right_index;
-			return 0; /* Not a palindrome */
+			return 0;
 		}
 
 		left_index++;
 		right_index--;
 	}
 
-	return 1; /* It is a palindrome */
+	return 1;
 }
 
-/* Deterministic version: returns the first case of inequality if there are any */
-int deterministic_palindrome_test(char* str, int* wrong_index1, int* wrong_index2)
+/* Deterministic version */
+/* Counts the number of comparisons */
+int deterministic_palindrome_test_2(char* str, int* wrong_index1, int* wrong_index2, int* total)
 {
 	int len = strlen(str);
 	int left_index = 0;
 	int right_index = len - 1;
-	int found_mismatch = 0;
 	int is_palindrome = 1;
 
-	while (left_index <= right_index)
+	*total = 0;
+
+	while (left_index < right_index)
 	{
-		if (str[left_index] != str[right_index] && !found_mismatch)
+		(*total)++;
+		if (str[left_index] != str[right_index])
 		{
 			*wrong_index1 = left_index;
 			*wrong_index2 = right_index;
 			is_palindrome = 0;
-			found_mismatch = 1;
 		}
 
 		left_index++;
@@ -51,22 +56,25 @@ int deterministic_palindrome_test(char* str, int* wrong_index1, int* wrong_index
 	return is_palindrome;
 }
 
-void result_check(int flag, char* str, int wrong_index1, int wrong_index2)
+void result_check(int flag, char* str, int wrong_index1, int wrong_index2, int total)
 {
 	if (flag == 1)
-		printf("%s IS a palindrome\n\n", str);
+		printf("%s IS a palindrome\n", str);
 	else
 	{
 		printf("\n%s is NOT a palindrome\n", str);
 		printf("%s[%d] = %c != %s[%d] = %c\n\n",
 			str, wrong_index1, str[wrong_index1], str, wrong_index2, str[wrong_index2]);
 	}
+	printf("\nTotal number of comparisons = %d\n\n", total);
 }
 
 int main(void)
 {
 	char str[STRSIZE];
 	int flag, flag2, wrong_index1, wrong_index2;
+	int total1 = 0;
+	int total2 = 0;
 	char* first_message[] = { "Standard Vs. Deterministic\n",
 							"---------------------------\n",
 							"Standard version:\n",
@@ -75,19 +83,19 @@ int main(void)
 
 	printf("Enter a string:\n");
 	fgets(str, STRSIZE, stdin);
-	/* Remove the trailing newline character from fgets() */
 	str[strcspn(str, "\n")] = 0;
 
-	flag = palindrome_test(str, &wrong_index1, &wrong_index2);
-	flag2 = deterministic_palindrome_test(str, &wrong_index1, &wrong_index2);
+	flag = palindrome_test_version_2(str, &wrong_index1, &wrong_index2, &total1);
+	flag2 = deterministic_palindrome_test_2(str, &wrong_index1, &wrong_index2, &total2);
 
 	for (i = 0; first_message[i] != NULL; i++)
 	{
-		printf(first_message[i]);
+		printf("%s", first_message[i]);
 	}
-	result_check(flag, str, wrong_index1, wrong_index2);
+
+	result_check(flag, str, wrong_index1, wrong_index2, total1);
 	printf("Deterministic version:\n");
-	result_check(flag2, str, wrong_index1, wrong_index2);
+	result_check(flag2, str, wrong_index1, wrong_index2, total2);
 
 	return 0;
 }
