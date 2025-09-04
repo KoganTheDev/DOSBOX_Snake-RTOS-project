@@ -1,7 +1,7 @@
 #include "food.h"
 #include "snake.h"
 #include "music.h"
-
+#include "wall.h"
 
 POSITION food;
 
@@ -33,6 +33,15 @@ void spawn_food()
             }
         }
     } while (on_snake);
+
+    //! Will need to be refactored to a separate fucntion
+    //! Can call it spawn_objects and use it to spawn wall & food at once
+    spawn_wall(); 
+}
+
+void draw_food()
+{
+    display_draft[food.y][food.x] = '*'; // Food is '*'
 }
 
 
@@ -42,7 +51,6 @@ int is_snake_on_food()
     if (snake.body[0].x == food.x && snake.body[0].y == food.y)
     {
         spawn_food();
-
         return 1;
     }
 

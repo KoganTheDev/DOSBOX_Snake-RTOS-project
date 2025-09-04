@@ -1,3 +1,4 @@
+// This header and C file are responsible on managing everything related to the snake object in game
 #pragma once
 
 #ifndef SNAKE_H

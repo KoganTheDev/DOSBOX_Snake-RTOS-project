@@ -1,3 +1,4 @@
+// This header and C file are responsible to most of the game logic
 #pragma once
 
 #ifndef GAME_M~1_H

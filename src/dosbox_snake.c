@@ -24,7 +24,6 @@ void main()
     {
         receiver(); // Get and process user input from the interrupt handler.
         updater(); // Update game logic and render the screen draft.
-        displayer(); // Print the screen to the console.
 
         // Sleep for a short duration to control the game speed.
         delay(game_speed); // Equivalent to sleep(1) in seconds.

@@ -1,3 +1,4 @@
+// This header and C file are responsible on creating the food object and respawn it when needed
 #pragma once
 
 #ifndef FOOD_H
@@ -14,7 +15,7 @@ typedef enum limits_for_spawning_elements
 	//! NOTE: CURRENT LIMIT IS SET FOR ELEMENTS OF SIZE 1x1, SIZE 2x2 or more will probably cause bugs!
 
 	//! LIMITS ARE INCLUSIVE meaning an object can be spawned on 
-	UPPER_LIMIT = 3, // One row lower than the northern boundry
+	UPPER_LIMIT = 2, // One row lower than the northern boundry
 	LOWER_LIMIT = DISPLAY_ROWS - 2, // One row higher than the southern boundry
 	LEFT_LIMIT = 1, // One row to the right of the left boundry
 	RIGHT_LIMIT = DISPLAY_COLS - 2, // One row to the left of the right limit
@@ -24,6 +25,7 @@ typedef enum limits_for_spawning_elements
 extern POSITION food; // Position of the food
 
 void spawn_food(); // Spawns food at a random position not occupied by the snake.
+void draw_food(); // Inserts the food object into the display draft
 int is_snake_on_food(); // Checks if the snake on the food, if so enlarge the snake by one
 
 #endif

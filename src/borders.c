@@ -8,7 +8,7 @@ POSITION border_east[DISPLAY_ROWS];
 POSITION border_west[DISPLAY_ROWS];
 
 // Globals relevant only to this file
-int first_row = 2;
+int first_row = 1;
 int last_row = DISPLAY_ROWS - 1;
 int last_col = DISPLAY_COLS - 1;
 
@@ -77,7 +77,7 @@ int is_snake_on_border()
     POSITION snake_head = snake.body[0];
 
     // Get border coordinates from the border arrays
-    int north_y = 2;
+    int north_y = 1;
     int south_y = DISPLAY_ROWS - 1;
     int west_x = 0;
     int east_x = DISPLAY_COLS - 1;

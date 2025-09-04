@@ -1,3 +1,4 @@
+// This header and C file are responsible of managing all of the screens in the game
 #pragma once
 
 #ifndef SCREENS_H

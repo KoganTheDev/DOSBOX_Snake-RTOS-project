@@ -1,3 +1,4 @@
+// This header and C file are responsible on using and managing the new keyboard interrupt handler
 #pragma once
 
 #ifndef KEYBOA~1_H

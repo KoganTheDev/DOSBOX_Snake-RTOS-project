@@ -1,3 +1,4 @@
+// This header and C file are responsible on the sound design of the game
 #pragma once
 
 #ifndef MUSIC_H

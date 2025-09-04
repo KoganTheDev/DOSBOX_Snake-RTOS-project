@@ -4,6 +4,10 @@
 #include "score.h"
 #include "keyboa~1.h"
 #include "borders.h"
+#include "cursor.h"
+#include "clock.h"
+#include "wall.h"
+
 
 char display[DISPLAY_ROWS * DISPLAY_COLS + DISPLAY_ROWS + 1];
 char display_draft[DISPLAY_ROWS][DISPLAY_COLS];
@@ -44,7 +48,8 @@ void update_display_buffer()
 
 void draw_game_elements()
 {
-    char score_text[12]; // Used for score + score number up to 99999
+    char buffer[DISPLAY_COLS]; // A temp buffer for the entire top row
+    int elapsed_time;
     int x;
     int y;
     int i;
@@ -54,23 +59,41 @@ void draw_game_elements()
 
     // TODO: Implement different sizes for the food for difficulty
     // Draw the food
-    display_draft[food.y][food.x] = '*'; // Food is '*'
+    draw_food();
+
+    // Draw the Wall object
+    draw_wall();
+
+    // Calculate and display the elapsed time
+    elapsed_time = (int)difftime(time(NULL), start_time);
 
     // Draw the score at the top-left corner
-    sprintf(score_text, "Score: %d", score);
-    for (i = 0; score_text[i] != '\0'; i++)
+    sprintf(buffer, "Level: %d | Score %d | Time %d", level, score, elapsed_time);
+    for (i = 0; buffer[i] != '\0'; i++)
     {
-        display_draft[0][i] = score_text[i];
+        display_draft[0][i] = buffer[i];
     }
+
 
     // TODO: Add timer and time display
 }
 
-
+//! CRITICAL: handles smooth printing and colors, if possible refactor
 void displayer()
 {
-    clrscr();
-    printf("%s", display); // Print the entire screen buffer
+    char far* video_memory = (char far*)0xB8000000;
+    int i, j;
+    int buffer_index = 0;
+
+    // Iterate through the display buffer and copy characters and attributes
+    for (i = 0; i < DISPLAY_ROWS; i++) {
+        for (j = 0; j < DISPLAY_COLS; j++) {
+            // Write the character
+            *(video_memory + (i * 80 + j) * 2) = display_draft[i][j];
+            // Write the color attribute (e.g., light gray on black)
+            *(video_memory + (i * 80 + j) * 2 + 1) = 0x07;
+        }
+    }
 }
 
 void receiver()
@@ -109,6 +132,9 @@ void updater()
         initialize_snake();
         srand(time(NULL)); // Seed the random number generator
         spawn_food(); // Spawn the first food item, uses srand seed
+        spawn_wall(); // Spawn the first wall near the food
+        set_full_block_cursor(); // Enlarge the cursor`s size
+        start_time = time(NULL); // Capture the start time
         initial_run = 0;
     }
 
@@ -118,9 +144,11 @@ void updater()
     // TODO: put collision detection here. 
     // TODO: detection against food, walls and out-of-bounds
 
-    if (is_snake_on_border() || snake_self_collision()) // Checks collision against the borders
+    if (is_snake_on_border() ||
+        snake_self_collision() ||
+        is_snake_on_wall()) // Checks collision against the borders
     {
-        delay(500); // Allow the player to understand the cause of the problem
+        delay(300); // Allows the player to understand the cause of the problem
         game_over = 1;
     }
 
@@ -129,7 +157,8 @@ void updater()
         clear_display_draft(); // Clear the display draft before drawing
         draw_game_elements(); // Draw the snake, food, and score
         update_display_buffer(); // Copy the draft to the main display buffer
-
+        displayer(); // Display the content of the game
+        move_cursor_to_snake_head();
         // !DEBUG
         game_speed = 100;
         //! debug

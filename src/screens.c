@@ -44,8 +44,45 @@ void print_thank_you_message_screen()
 
 void print_game_over_screen()
 {
+    char* message; // Personalized message
+
     restore_keyboard_handler();
     clrscr();
+
+    // Personalized message
+    if (score >= 300) {
+        message = "You're a master of the serpent! A true snake charmer!\n";
+    }
+    else if (score >= 270) {
+        message = "Absolutely incredible! You've reached the top tiers!\n";
+    }
+    else if (score >= 240) {
+        message = "A legend in the making! Unstoppable!\n";
+    }
+    else if (score >= 210) {
+        message = "Epic! You are a master of the grid!\n";
+    }
+    else if (score >= 180) {
+        message = "Phenomenal! Your reflexes are unmatched!\n";
+    }
+    else if (score >= 150) {
+        message = "A solid performance! Well done!\n";
+    }
+    else if (score >= 120) {
+        message = "You've got the hang of it now! Keep going!\n";
+    }
+    else if (score >= 90) {
+        message = "That's a great run! Not bad at all!\n";
+    }
+    else if (score >= 60) {
+        message = "Good effort! You're getting better every time.\n";
+    }
+    else if (score >= 30) {
+        message = "Keep slithering! You'll get there.\n";
+    }
+    else {
+        message = "Each fruit is a lesson; each bite, a victory.\n";
+    }
 
     printf("\n\n\n");
     printf("                *****************************************************\n");
@@ -54,6 +91,7 @@ void print_game_over_screen()
     printf("                *                                                   *\n");
     printf("                *****************************************************\n");
     printf("\n\n");
+    printf("                %s\n", message);
     printf("                Your final score was: %d\n", score);
     printf("\n\n");
     printf("                Press any key to exit...\n");
