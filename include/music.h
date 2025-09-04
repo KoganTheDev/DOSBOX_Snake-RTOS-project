@@ -48,8 +48,7 @@ void play_game_over_melody(); // Plays a melody for the game over screen
 void play_snake_eat_food_sound(); // Play a sound that is used when the snake eats the fruit
 void play_level_up_sound(); // Plays a sound that indicates a level up, making the game harder
 
-// TODO: If we decide too, we must not allow the snake to collapse into itself, and if it does play this sound
-// Plays a sound when the snake hits a wall
-void play_snake_hits_a_wall_sound();
+// Plays a sound when the snake hits a wall, hits a border, collides with its body segments or moves into itself
+void play_snake_dies_sound();
 
 #endif

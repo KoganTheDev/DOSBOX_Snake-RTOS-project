@@ -14,7 +14,6 @@ extern POSITION border_south[DISPLAY_COLS];
 extern POSITION border_east[DISPLAY_ROWS];
 extern POSITION border_west[DISPLAY_ROWS];
 
-// TODO: Change the way the elements are draws or insert the borders each time
 void initialize_borders(); // Fills the borders with characters
 void draw_borders(); // Insert the borders into the display array
 int is_snake_on_border(); // If collision detected, returns 1, else 0

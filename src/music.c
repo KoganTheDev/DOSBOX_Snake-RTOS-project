@@ -113,7 +113,7 @@ void play_level_up_sound()
     play_sound(sound, notes);
 }
 
-void play_snake_hits_a_wall_sound()
+void play_snake_dies_sound()
 {
     int sound[][2] = {
         {NOTE_E4, SIXTEENTH_NOTE},

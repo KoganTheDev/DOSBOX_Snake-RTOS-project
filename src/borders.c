@@ -1,5 +1,6 @@
 #include "borders.h"
 #include "snake.h" // used to check collision against the snake object
+#include "music.h"
 
 POSITION border_north[DISPLAY_COLS - 1];
 POSITION border_south[DISPLAY_COLS];
@@ -87,6 +88,7 @@ int is_snake_on_border()
         snake_head.y == north_y ||
         snake_head.y == south_y)
     {
+        play_snake_dies_sound();
         return 1; // Collision detected
     }
 

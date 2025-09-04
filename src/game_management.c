@@ -118,8 +118,9 @@ void updater()
     // TODO: put collision detection here. 
     // TODO: detection against food, walls and out-of-bounds
 
-    if (is_snake_on_border()) // Checks collision against the borders
+    if (is_snake_on_border() || snake_self_collision()) // Checks collision against the borders
     {
+        delay(500); // Allow the player to understand the cause of the problem
         game_over = 1;
     }
 

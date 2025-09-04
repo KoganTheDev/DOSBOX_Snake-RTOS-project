@@ -30,7 +30,6 @@ void initialize_snake()
 
     for (i = 0; i < snake.length; i++)
     {
-        // TODO: Adjust here if the snake is out-of-bounds at start.
         snake.body[i].x = start_x - i; // Horizontal placement
         snake.body[i].y = start_y; // Vertical placement
     }
@@ -40,58 +39,42 @@ void initialize_snake()
 void move_snake()
 {
     int i;
-    POSITION* head = &snake.body[0];
-    POSITION prev_head = *head; // Store previous head position
+    POSITION prev_head = snake.body[0]; // Store previous head position
 
-    // Move body segments
+    // Move body segments (from tail to head)
     for (i = snake.length - 1; i > 0; i--)
     {
         snake.body[i] = snake.body[i - 1];
     }
 
     // Update head position based on direction
-    head = &snake.body[0];
-
-    // Update the head position based on direction
     switch (snake.direction)
     {
     case UP_ARROW:
-        head->y--; // Go up
+        snake.body[0].y--; // Go up
         break;
     case DOWN_ARROW:
-        head->y++; // Go down
+        snake.body[0].y++; // Go down
         break;
     case LEFT_ARROW:
-        head->x--; // Go left
+        snake.body[0].x--; // Go left
         break;
     case RIGHT_ARROW:
-        head->x++; // Go right
+        snake.body[0].x++; // Go right
         break;
     }
 
-    // Check if the snale has eaten the food
-    if (head->x == food.x && head->y == food.y)
+    if (is_snake_on_food())
     {
-        play_snake_eat_food_sound(); 
+        play_snake_eat_food_sound();
+
         // Increase the length of the snake
         if (snake.length < SNAKE_MAX_LENGTH)
         {
             snake.length++;
-            for (i = snake.length; i > 0; i--)
-            {
-                snake.body[i] = snake.body[i - 1];
-            }
-            snake.body[0] = *head;
         }
 
-        // Increase Score
-        // TODO: ADD score multiplayer for fun!
         score += 10;
-
-        // TODO: Implement level up mechanism by making the game harder
-
-        // TODO: Maybe do something cool like displaying a message or sound effect
-        spawn_food(); // Spawn new target for the snake
     }
 }
 
@@ -158,4 +141,22 @@ void draw_snake()
             }
         }
     }
+}
+
+int snake_self_collision()
+{
+    int i;
+    POSITION snake_head = snake.body[0];
+
+    // Start from the first body segment (index 1) and check against the head (index 0)
+    for (i = 1; i < snake.length; i++)
+    {
+        if (snake_head.x == snake.body[i].x && snake_head.y == snake.body[i].y)
+        {
+            play_snake_dies_sound();
+            return 1; // Collision detected
+        }
+    }
+
+    return 0; // No collision
 }
