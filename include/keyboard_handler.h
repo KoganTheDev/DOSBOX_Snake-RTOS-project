@@ -29,6 +29,6 @@ void interrupt new_keyboard_handler();
 
 void set_keyboard_handler(); // Initial step, connects the old handler with the new one
 void restore_keyboard_handler(); // Restore the original keyboard interrupt handler
-int get_next_key_from_queue(); // CRITICAL: used to get the next keyboard hit from the ISRQ while making sure there is no race condition
+int get_next_key_from_quque(); // CRITICAL: used to get the next keyboard hit from the ISRQ while making sure there is no race condition
 
 #endif

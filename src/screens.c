@@ -48,15 +48,15 @@ void print_game_over_screen()
     clrscr();
 
     printf("\n\n\n");
-    printf("                  *****************************************************\n");
-    printf("                  * *\n");
-    printf("                  * GAME OVER!                    *\n");
-    printf("                  * *\n");
-    printf("                  *****************************************************\n");
+    printf("                *****************************************************\n");
+    printf("                *                                                   *\n");
+    printf("                *                     GAME OVER!                    *\n");
+    printf("                *                                                   *\n");
+    printf("                *****************************************************\n");
     printf("\n\n");
-    printf("                      Your final score was: %d\n", score);
+    printf("                Your final score was: %d\n", score);
     printf("\n\n");
-    printf("                  Press any key to exit...\n");
+    printf("                Press any key to exit...\n");
     
     play_game_over_melody();
 

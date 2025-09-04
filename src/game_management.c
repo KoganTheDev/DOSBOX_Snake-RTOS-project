@@ -3,6 +3,7 @@
 #include "food.h"
 #include "score.h"
 #include "keyboa~1.h"
+#include "borders.h"
 
 char display[DISPLAY_ROWS * DISPLAY_COLS + DISPLAY_ROWS + 1];
 char display_draft[DISPLAY_ROWS][DISPLAY_COLS];
@@ -37,18 +38,18 @@ void update_display_buffer()
         {
             display[index++] = display_draft[i][j];
         }
-        display[index++] = '\n';
     }
     display[index] = '\0'; // Null-terminate the string
 }
 
 void draw_game_elements()
 {
-    char score_text[20];
+    char score_text[12]; // Used for score + score number up to 99999
     int x;
     int y;
     int i;
 
+    draw_borders();
     draw_snake();
 
     // TODO: Implement different sizes for the food for difficulty
@@ -104,6 +105,7 @@ void updater()
     // Initial setup for the first run of the game.
     if (initial_run == 1)
     {
+        initialize_borders();
         initialize_snake();
         srand(time(NULL)); // Seed the random number generator
         spawn_food(); // Spawn the first food item, uses srand seed
@@ -116,11 +118,20 @@ void updater()
     // TODO: put collision detection here. 
     // TODO: detection against food, walls and out-of-bounds
 
+    if (is_snake_on_border()) // Checks collision against the borders
+    {
+        game_over = 1;
+    }
+
     if (!game_over)
     {
         clear_display_draft(); // Clear the display draft before drawing
         draw_game_elements(); // Draw the snake, food, and score
         update_display_buffer(); // Copy the draft to the main display buffer
+
+        // !DEBUG
+        game_speed = 100;
+        //! debug
     }
     else
     {

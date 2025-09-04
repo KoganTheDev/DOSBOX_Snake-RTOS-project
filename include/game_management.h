@@ -5,7 +5,7 @@
 
 #define ARR_SIZE 1000
 #define DISPLAY_ROWS 25
-#define DISPLAY_COLS 40
+#define DISPLAY_COLS 80
 
 #include <stdio.h>
 

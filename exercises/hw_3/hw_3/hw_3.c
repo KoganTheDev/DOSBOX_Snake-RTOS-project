@@ -24,6 +24,7 @@ typedef enum flags_for_make_keys
     FLAG_RSHIFT = 0x02,
     FLAG_CTRL = 0x04,
     FLAG_ALT = 0x08,
+};
 
 // --- Global variables for the password system ---
 volatile int password_index = 0; // Tracks the current number of keys captured.

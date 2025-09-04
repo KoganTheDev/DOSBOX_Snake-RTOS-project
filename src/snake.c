@@ -90,7 +90,7 @@ void move_snake()
 
         // TODO: Implement level up mechanism by making the game harder
 
-        // TODO: Maybe do somehting cool like displaying a message or sound effect
+        // TODO: Maybe do something cool like displaying a message or sound effect
         spawn_food(); // Spawn new target for the snake
     }
 }
@@ -101,6 +101,7 @@ void update_snake_direction()
     {
         int new_direction = ch_arr[front++];
 
+        // TODO: Cause GAME OVER through here if the direction is oposite
         // Ensure the new direction is not directly opposite to the current direction
         if ((new_direction == UP_ARROW && snake.direction != DOWN_ARROW) ||
             (new_direction == DOWN_ARROW && snake.direction != UP_ARROW) ||
@@ -120,29 +121,40 @@ void update_snake_direction()
 void draw_snake()
 {
     int i;
+    int prev_x, prev_y;
 
-    for (i = 0; i < snake.length; i++)
+    // Draw the head of the snake
+    if (snake.length > 0)
+    {
+        int head_x = snake.body[0].x;
+        int head_y = snake.body[0].y;
+
+        if (0 <= head_x && head_x < DISPLAY_COLS && 0 <= head_y && head_y < DISPLAY_ROWS)
+        {
+            display_draft[head_y][head_x] = '@';
+        }
+    }
+
+    // Draw the body segments based on the movement of each segment
+    for (i = 1; i < snake.length; i++)
     {
         int x = snake.body[i].x;
         int y = snake.body[i].y;
 
+        // Check if the segment is within display boundaries
         if (0 <= x && x < DISPLAY_COLS && 0 <= y && y < DISPLAY_ROWS)
         {
-            if (i == 0) // Head segment
+            prev_x = snake.body[i - 1].x;
+            prev_y = snake.body[i - 1].y;
+
+            // Determine if the movement is horizontal or vertical
+            if (x == prev_x) // Vertical movement
             {
-                display_draft[y][x] = '@';
+                display_draft[y][x] = '|';
             }
-            else
+            else if (y == prev_y) // Horizontal movement
             {
-                // Change body segments according to the direction of movement
-                if (UP_ARROW == snake.direction || snake.direction == DOWN_ARROW) // Vertical movement
-                {
-                    display_draft[y][x] = '|'; // Head is '@', body is '|'
-                }
-                else // horizontal movement
-                {
-                    display_draft[y][x] =  '='; // Head is '@', body is '='
-                }
+                display_draft[y][x] = '=';
             }
         }
     }
