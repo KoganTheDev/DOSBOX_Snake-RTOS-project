@@ -49,6 +49,10 @@ Skip1:;
     }
     if (scan_code == ESCAPE_KEY)
     {
+        // Restore ISR handlers to prevent a crash
+        restore_keyboard_handler();
+        restore_clock_handler();
+
         print_thank_you_message_screen(); 
     }
 }

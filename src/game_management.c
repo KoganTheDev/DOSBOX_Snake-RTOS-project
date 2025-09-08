@@ -12,7 +12,7 @@
 char display[DISPLAY_ROWS * DISPLAY_COLS + DISPLAY_ROWS + 1];
 char display_draft[DISPLAY_ROWS][DISPLAY_COLS];
 int initial_run = 1; // Flag to indicate if it's the first run of the game
-int game_speed = 1000; // Game speed (delay in milliseconds)
+int game_speed = 100; // Game speed (delay in milliseconds)
 int game_over = 0; // Flag to indicate if the game is over
 
 
@@ -49,11 +49,12 @@ void update_display_buffer()
 void draw_game_elements()
 {
     char buffer[DISPLAY_COLS]; // A temp buffer for the entire top row
-    int elapsed_time;
+    int remaining_time;
     int x;
     int y;
     int i;
-
+    int level = 1; // TODO: Change when dificulty is implemented
+    
     draw_borders();
     draw_snake();
 
@@ -64,11 +65,11 @@ void draw_game_elements()
     // Draw the Wall object
     draw_wall();
 
-    // Calculate and display the elapsed time
-    elapsed_time = (int)difftime(time(NULL), start_time);
+    // Calculate and display the remainng time
+    remaining_time = get_remaining_time();
 
     // Draw the score at the top-left corner
-    sprintf(buffer, "Level: %d | Score %d | Time %d", level, score, elapsed_time);
+    sprintf(buffer, "Level: %d | Score %d | Time %d", level, score, remaining_time);
     for (i = 0; buffer[i] != '\0'; i++)
     {
         display_draft[0][i] = buffer[i];
@@ -130,11 +131,14 @@ void updater()
     {
         initialize_borders();
         initialize_snake();
-        srand(time(NULL)); // Seed the random number generator
         spawn_food(); // Spawn the first food item, uses srand seed
         spawn_wall(); // Spawn the first wall near the food
         set_full_block_cursor(); // Enlarge the cursor`s size
-        start_time = time(NULL); // Capture the start time
+
+        // Initialize the clock and start the countdown
+        set_clock_handler();
+        start_countdown();
+
         initial_run = 0;
     }
 
@@ -146,10 +150,13 @@ void updater()
 
     if (is_snake_on_border() ||
         snake_self_collision() ||
-        is_snake_on_wall()) // Checks collision against the borders
+        is_snake_on_wall() ||
+        get_remaining_time() == -1) //! Used -1 so we won`t get game over due to timeout, need to be fixed
     {
         delay(300); // Allows the player to understand the cause of the problem
         game_over = 1;
+        restore_keyboard_handler();
+        restore_clock_handler(); // Remove the clock ISR
     }
 
     if (!game_over)
@@ -159,9 +166,6 @@ void updater()
         update_display_buffer(); // Copy the draft to the main display buffer
         displayer(); // Display the content of the game
         move_cursor_to_snake_head();
-        // !DEBUG
-        game_speed = 100;
-        //! debug
     }
     else
     {

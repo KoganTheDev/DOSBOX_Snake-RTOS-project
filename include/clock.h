@@ -1,15 +1,27 @@
-// This header and C file are responsible on using the clock for the game
+//// This header and C file are responsible on using the clock for the game
 #pragma once
 
 #ifndef CLOCK_H
 #define CLOCK_H
 
-#include <time.h>
+#include <dos.h>
 
-//! Possible improvements: use RTC interrupts instead of the time header
-extern time_t start_time;
+#define CLOCK_HARDWARE_INTERRUPT 0x08
 
-//! move level into the difficult manager(handler) when we start write a difficulty option
-extern int level;
+extern volatile int countdown_seconds;
+extern volatile int countdown_running;
+extern int level_time; // Total time for the level in seconds
 
-#endif 
+// Initializes the PIT to generate interrupts for the countdown timer.
+void set_clock_handler();
+
+// Uninstalls the custom clock interrupt handler.
+void restore_clock_handler();
+
+// Starts the countdown timer for the current level.
+void start_countdown();
+
+// Gets the remaining time on the countdown timer.
+int get_remaining_time();
+
+#endif

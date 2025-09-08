@@ -1,6 +1,5 @@
 #include "screens.h"
 #include "music.h"
-#include "screens.h"
 #include "score.h"
 
 void print_welcome_message()
@@ -22,9 +21,7 @@ void print_welcome_message()
 }
 
 void print_thank_you_message_screen()
-
 {
-    restore_keyboard_handler();
     clrscr(); // Clear the console (Turbo C function)
 
     printf("\n\n\n");
@@ -46,7 +43,6 @@ void print_game_over_screen()
 {
     char* message; // Personalized message
 
-    restore_keyboard_handler();
     clrscr();
 
     // Personalized message

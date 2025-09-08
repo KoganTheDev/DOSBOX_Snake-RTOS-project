@@ -9,7 +9,7 @@ void set_full_block_cursor()
 	// Set the cursor start line at 0
 	outportb(CRT_DATA_PORT, 0);
 
-	// Select the Cursor End register (0x08)
+	// Select the Cursor End register (CLOCK_HARDWARE_INTERRUPT)
 	outportb(CRT_INDEX_PORT, CURSOR_END_REG);
 
 	// Set the cursor end line to 15 to get a full block
