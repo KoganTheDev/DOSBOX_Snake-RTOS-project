@@ -512,4 +512,3 @@ FodyWeavers.xsd
 # Don`t include specific files
 RTOS_project_highlighted.pdf
 snake_requirements.xlsx
-compile_clean_and_run.bat
