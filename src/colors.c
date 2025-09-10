@@ -1,5 +1,7 @@
 #include "colors.h"
 
+// TODO: BEFORE SUBMITING MAKE SURE THE GAME IS COLORED CORRECTLY
+
 char display_colors[DISPLAY_ROWS][DISPLAY_COLS];
 
 const color_set game_color_sets[10] =
@@ -26,13 +28,10 @@ const color_set game_color_sets[10] =
     { GREY_BACKGROUND | MAGENTA, GREY_BACKGROUND | MAGENTA, GREY_BACKGROUND | MAGENTA, GREY_BACKGROUND | MAGENTA, GREY_BACKGROUND | MAGENTA, GREY_BACKGROUND }
 };
 
-// TODO: delete later when difficulty is implemented
-int k = 0; // Simulate cyclic color change
-
 void color_display_draft()
 {
     char char_game_element; // Holds the in game character for the element
-    int color_index = k % 10; // For 15 different color sets
+    int color_index = (level - 1) % 10; // For 10 different color sets
     int i;
     int j;
     int second_row = 1;
@@ -77,5 +76,4 @@ void color_display_draft()
             }
         }
     }
-    k++;
 }

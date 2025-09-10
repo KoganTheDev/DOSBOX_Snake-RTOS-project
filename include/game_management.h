@@ -24,12 +24,21 @@ extern char display_draft[DISPLAY_ROWS][DISPLAY_COLS];
 extern int initial_run; // Flag to indicate if it's the first run of the game
 extern int game_speed; // Game speed (delay in milliseconds)
 extern int game_over; // Flag to indicate if the game is over
+extern int level; // Represents the current level of the game
+extern int is_level_up_food_and_wall_flag; // Flag that`s used to indicate a level up for the food and wall objects
+extern int is_level_up_timer_flag; // Flag that`s used to indicate a level up for the game`s timer and allow a game speed limit
+extern int prev_food_counter;
 
 extern char display[DISPLAY_ROWS * DISPLAY_COLS + DISPLAY_ROWS + 1]; // Main display buffer (25 rows x 40 columns + null terminator) 
 
 void clear_display_draft(); // Helper function - Clears the display draft by filling it with spaces.
 void update_display_buffer(); // Helper function - Copies the display draft to the main display buffer.
 void draw_game_elements(); // Draws the snake, food and the score on the display draft
+void on_level_up(); // Turns on flags that cause changes in the way the game works
+int is_level_up_food_and_wall(); // Turns on a flag that casues changes in the food and wall objects
+int is_level_up_timer(); // Turns on a flag that causes changes in the game`s time limit and game speed
+
+
 
 // --- MAIN LOOP FUNCTIONS ---
 

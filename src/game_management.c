@@ -14,7 +14,44 @@ char display_draft[DISPLAY_ROWS][DISPLAY_COLS];
 int initial_run = 1; // Flag to indicate if it's the first run of the game
 int game_speed = 100; // Game speed (delay in milliseconds)
 int game_over = 0; // Flag to indicate if the game is over
+int level = 1;
 
+int is_level_up_food_and_wall_flag = 0; // Flag that`s used to indicate a level up for the food and wall objects
+int is_level_up_timer_flag = 0; // Flag that`s used to indicate a level up for the game`s timer and allow a game speed limit
+int prev_food_counter = 0;
+
+
+int is_level_up_food_and_wall()
+{
+    if (is_level_up_food_and_wall_flag)
+    {
+        is_level_up_food_and_wall_flag = 0;
+        return 1; // Level up
+    }
+
+    return 0; // No level up
+}
+
+int is_level_up_timer()
+{
+    if (is_level_up_timer_flag)
+    {
+        is_level_up_timer_flag = 0;
+        return 1; // Level up
+    }
+
+    return 0; // No level up
+}
+
+
+void on_level_up()
+{
+    level++;
+    prev_food_counter = food_eaten;
+    play_level_up_sound();
+    is_level_up_food_and_wall_flag = 1;
+    is_level_up_timer_flag = 1;
+}
 
 void clear_display_draft()
 {
@@ -54,7 +91,6 @@ void draw_game_elements()
     int x;
     int y;
     int i;
-    int level = 1; // TODO: Change when dificulty is implemented
     
     draw_borders();
     draw_snake();
@@ -142,8 +178,12 @@ void updater()
     update_snake_direction();
     move_snake();
 
-    // TODO: put collision detection here. 
-    // TODO: detection against food, walls and out-of-bounds
+    // Check for a level up
+    // Level up is caused when the snake eats another 2 fruit objects
+    if (prev_food_counter + 2 == food_eaten)
+    {
+        on_level_up();
+    }
 
     if (is_snake_on_border() ||
         snake_self_collision() ||
@@ -169,5 +209,4 @@ void updater()
     {
         print_game_over_screen();
     }
-
 }

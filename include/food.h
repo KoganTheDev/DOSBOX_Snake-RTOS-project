@@ -23,6 +23,7 @@ typedef enum limits_for_spawning_elements
 
 
 extern POSITION food; // Position of the food
+extern int food_eaten;
 
 void spawn_food(); // Spawns food at a random position not occupied by the snake.
 void draw_food(); // Inserts the food object into the display draft
