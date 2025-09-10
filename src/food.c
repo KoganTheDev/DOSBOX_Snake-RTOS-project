@@ -3,6 +3,8 @@
 #include "music.h"
 #include "wall.h"
 
+int food_eaten = 0;
+
 POSITION food;
 
 void spawn_food()
@@ -84,6 +86,7 @@ int is_snake_on_food()
             if (snake.body[0].x == food.x + dx &&
                 snake.body[0].y == food.y + dy)
             {
+                food_eaten++;  
                 spawn_food();
                 return 1;
             }
