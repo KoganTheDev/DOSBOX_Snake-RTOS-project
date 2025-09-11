@@ -183,6 +183,8 @@ void updater()
     if (prev_food_counter + 2 == food_eaten)
     {
         on_level_up();
+        // Immediately regenerate walls for the new level
+        regenerate_walls_for_level_change();
     }
 
     if (is_snake_on_border() ||
