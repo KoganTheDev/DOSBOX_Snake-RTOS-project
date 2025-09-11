@@ -62,14 +62,20 @@ void color_display_draft()
             case ('<'): // Left wall
                 display_colors[i][j] = game_color_sets[color_index].wall;
                 break;
-            case ('*'): // Food
+            case ('\\'): // Food
+            case('_'):
+            case('('):
+            case(')'):
+            case('/'):
                 display_colors[i][j] = game_color_sets[color_index].food;
                 break;
             case (' '):
                 display_colors[i][j] = game_color_sets[color_index].screen;
             default:
                 // If it's a border character, set border color
-                if (i == second_row || i == DISPLAY_ROWS - 1 || j == 0 || j == DISPLAY_COLS - 1) {
+                if (i == second_row || i == DISPLAY_ROWS - 1 ||
+                    j == 0 || j == DISPLAY_COLS - 1)
+                {
                     display_colors[i][j] = game_color_sets[color_index].borders;
                 }
                 break;
