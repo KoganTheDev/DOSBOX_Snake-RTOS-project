@@ -76,8 +76,6 @@ void spawn_food()
         }
     } while (on_snake);
 
-    //! Will need to be refactored to a separate function
-    //! Can call it spawn_objects and use it to spawn wall & food at once
     spawn_wall();
 }
 

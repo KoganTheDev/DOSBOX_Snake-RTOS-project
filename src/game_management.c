@@ -94,13 +94,8 @@ void draw_game_elements()
     
     draw_borders();
     draw_snake();
-
-    // TODO: Implement different sizes for the food for difficulty
-    // Draw the food
-    draw_food();
-
-    // Draw the Wall object
-    draw_wall();
+    draw_food();     // Draw the food
+    draw_wall();     // Draw the Wall object
 
     // Calculate and display the remainng time
     remaining_time = get_remaining_time();
@@ -190,7 +185,7 @@ void updater()
     if (is_snake_on_border() ||
         snake_self_collision() ||
         is_snake_on_wall() ||
-        get_remaining_time() == -1) //! Used -1 so we won`t get game over due to timeout, need to be deleted when time is added when leveling up\eating food
+        get_remaining_time() == -1) // TODO: Change to "" == 0 to cause game over due to time out
     {
         delay(300); // Allows the player to understand the cause of the problem
         game_over = 1;

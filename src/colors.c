@@ -6,26 +6,28 @@ char display_colors[DISPLAY_ROWS][DISPLAY_COLS];
 
 const color_set game_color_sets[10] =
 {
+ //           snake head          snake segment                      wall                            borders                 food               screen                         
+
     // 0: Classic High Contrast - White on Black
-    { (BLACK << 4) | WHITE, (BLACK << 4) | WHITE, (BLACK << 4) | WHITE, (BLACK << 4) | WHITE, (BLACK << 4) | WHITE, (BLACK << 4) | BLACK },
+    { (BLACK << 4) | ORANGE, (BLACK << 4) | ORANGE, (BLACK << 4) | RED, (BLACK << 4) | WHITE, (BLACK << 4) | GREEN, (BLACK << 4) | BLACK },
     // 1: Blue on Black
-    { (BLACK << 4) | BLUE, (BLACK << 4) | BLUE, (BLACK << 4) | BLUE, (BLACK << 4) | BLUE, (BLACK << 4) | BLUE, (BLACK << 4) | BLACK },
+    { (BLACK << 4) | ORANGE, (BLACK << 4) | ORANGE, (BLACK << 4) | RED, (BLACK << 4) | BLUE, (BLACK << 4) | GREEN, (BLACK << 4) | BLACK },
     // 2: Green on Black
-    { (BLACK << 4) | GREEN, (BLACK << 4) | GREEN, (BLACK << 4) | GREEN, (BLACK << 4) | GREEN, (BLACK << 4) | GREEN, (BLACK << 4) | BLACK },
+    { (BLACK << 4) | ORANGE, (BLACK << 4) | ORANGE, (BLACK << 4) | RED, (BLACK << 4) | GREEN, (BLACK << 4) | GREEN, (BLACK << 4) | BLACK },
     // 3: Yellow on Black
-    { (BLACK << 4) | YELLOW, (BLACK << 4) | YELLOW, (BLACK << 4) | YELLOW, (BLACK << 4) | YELLOW, (BLACK << 4) | YELLOW, (BLACK << 4) | BLACK },
+    { (BLACK << 4) | ORANGE, (BLACK << 4) | ORANGE, (BLACK << 4) | RED, (BLACK << 4) | YELLOW, (BLACK << 4) | GREEN, (BLACK << 4) | BLACK },
     // 4: Red on Black
-    { (BLACK << 4) | RED, (BLACK << 4) | RED, (BLACK << 4) | RED, (BLACK << 4) | RED, (BLACK << 4) | RED, (BLACK << 4) | BLACK },
+    { (BLACK << 4) | ORANGE, (BLACK << 4) | ORANGE, (BLACK << 4) | RED, (BLACK << 4) | RED, (BLACK << 4) | GREEN, (BLACK << 4) | BLACK },
     // 5: Black on Gray
-    { GREY_BACKGROUND | BLACK, GREY_BACKGROUND | BLACK, GREY_BACKGROUND | BLACK, GREY_BACKGROUND | BLACK, GREY_BACKGROUND | BLACK, GREY_BACKGROUND },
+    { GREY_BACKGROUND | ORANGE, GREY_BACKGROUND | ORANGE, GREY_BACKGROUND | RED, GREY_BACKGROUND | BLACK, GREY_BACKGROUND | GREEN, GREY_BACKGROUND },
     // 6: Blue on Gray
-    { GREY_BACKGROUND | BLUE, GREY_BACKGROUND | BLUE, GREY_BACKGROUND | BLUE, GREY_BACKGROUND | BLUE, GREY_BACKGROUND | BLUE, GREY_BACKGROUND },
+    { GREY_BACKGROUND | ORANGE, GREY_BACKGROUND | ORANGE, GREY_BACKGROUND | RED, GREY_BACKGROUND | BLUE, GREY_BACKGROUND | GREEN, GREY_BACKGROUND },
     // 7: Green on Gray
-    { GREY_BACKGROUND | GREEN, GREY_BACKGROUND | GREEN, GREY_BACKGROUND | GREEN, GREY_BACKGROUND | GREEN, GREY_BACKGROUND | GREEN, GREY_BACKGROUND },
+    { GREY_BACKGROUND | ORANGE, GREY_BACKGROUND | ORANGE, GREY_BACKGROUND | RED, GREY_BACKGROUND | GREEN, GREY_BACKGROUND | GREEN, GREY_BACKGROUND },
     // 8: Red on Gray
-    { GREY_BACKGROUND | RED, GREY_BACKGROUND | RED, GREY_BACKGROUND | RED, GREY_BACKGROUND | RED, GREY_BACKGROUND | RED, GREY_BACKGROUND },
+    { GREY_BACKGROUND | ORANGE, GREY_BACKGROUND | ORANGE, GREY_BACKGROUND | RED, GREY_BACKGROUND | RED, GREY_BACKGROUND | GREEN, GREY_BACKGROUND },
     // 9: Magenta on Gray
-    { GREY_BACKGROUND | MAGENTA, GREY_BACKGROUND | MAGENTA, GREY_BACKGROUND | MAGENTA, GREY_BACKGROUND | MAGENTA, GREY_BACKGROUND | MAGENTA, GREY_BACKGROUND }
+    { GREY_BACKGROUND | ORANGE, GREY_BACKGROUND | ORANGE, GREY_BACKGROUND | RED, GREY_BACKGROUND | MAGENTA, GREY_BACKGROUND | GREEN, GREY_BACKGROUND }
 };
 
 void color_display_draft()
@@ -67,6 +69,8 @@ void color_display_draft()
             case('('):
             case(')'):
             case('/'):
+            case('*'):
+            case(','):
                 display_colors[i][j] = game_color_sets[color_index].food;
                 break;
             case (' '):

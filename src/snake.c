@@ -18,8 +18,6 @@ void initialize_snake()
     int start_y;
     int i;
 
-    // TODO: for difficulty, create a variable for initial length, when leveling up,
-   // TODO: increase the length by 1 or 2.
     snake.length = 5; // Initial length of the snake
     snake.direction = RIGHT_ARROW; // Initial direction of the snake
 
@@ -35,7 +33,6 @@ void initialize_snake()
     }
 }
 
-// TODO: Implement collision detection with walls
 void move_snake()
 {
     int i;

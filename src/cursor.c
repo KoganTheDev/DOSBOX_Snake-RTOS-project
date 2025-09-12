@@ -1,6 +1,5 @@
 #include "cursor.h"
 
-
 void set_full_block_cursor()
 {
 	// Select the Cursor Start register (0x0A)

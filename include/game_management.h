@@ -16,7 +16,6 @@ typedef struct position
     int y; // Y coordinate
 } POSITION;
 
-
 // A 2D array to serve as the drawing canvas for the game.
 // It represents a 25-row, 40-column console screen.
 extern char display_draft[DISPLAY_ROWS][DISPLAY_COLS];
@@ -38,8 +37,6 @@ void on_level_up(); // Turns on flags that cause changes in the way the game wor
 int is_level_up_food_and_wall(); // Turns on a flag that casues changes in the food and wall objects
 int is_level_up_timer(); // Turns on a flag that causes changes in the game`s time limit and game speed
 
-
-
 // --- MAIN LOOP FUNCTIONS ---
 
 void displayer(); // This function is responsible for rendering the game state to the console.
@@ -52,7 +49,6 @@ void receiver();
 // This is the main game logic function. It performs the following tasks:
 // 1. Initializes the game state on the first run.
 // 2. Processes user input from the `ch_arr` queue to control the game.
-// TODO: after implementing full logic, add more documentation
 void updater();
 
 #endif

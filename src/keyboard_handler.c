@@ -7,13 +7,6 @@ char entered_ascii_codes[ARR_SIZE]; // Buffer for raw ASCII codes from keyboard
 int tail = 0; // Index of the last entered ASCII code
 int head = 0;
 
-
-// TODO: Refactor this function to improve readability.
-// TODO: Change logic to fit the logic for the snake game.
-// TODO: remove assembly code if possible.
-
-//TODO: Critical: try consuming scan codes if they are the same as the current direction
-//TODO: making the game a bit more reactive.
 void interrupt new_keyboard_handler(void)
 {
     int scan_code = 0;
@@ -65,8 +58,6 @@ void set_keyboard_handler(void)
     // Set the new keyboard interrupt handler.
     setvect(KEYBOARD_HARDWARE_INTERRUPT, new_keyboard_handler);
 }
-
-
 
 void restore_keyboard_handler()
 {
