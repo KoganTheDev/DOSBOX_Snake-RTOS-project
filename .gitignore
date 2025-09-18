@@ -512,3 +512,13 @@ FodyWeavers.xsd
 # Don`t include specific files
 RTOS_project_highlighted.pdf
 snake_requirements.xlsx
+
+# Include only the subfolder that contains the relevant code for hw_4
+/exercises/hw_4/*
+!/exercises/hw_4/hw_4/
+/exercises/hw_4/hw_4/*
+!/exercises/hw_4/hw_4/XINU4WIN/
+/exercises/hw_4/hw_4/XINU4WIN/*
+!/exercises/hw_4/hw_4/XINU4WIN/NEWSRC/
+/exercises/hw_4/hw_4/XINU4WIN/NEWSRC/*
+!/exercises/hw_4/hw_4/XINU4WIN/NEWSRC/hw_4/
