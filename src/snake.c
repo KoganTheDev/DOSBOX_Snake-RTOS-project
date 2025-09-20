@@ -4,6 +4,9 @@
 #include "food.h"
 #include "score.h"
 #include "music.h"
+#include "clock.h"
+#include <dos.h>
+#include <stdio.h>
 
 SNAKE snake; // Global struct for the snake in the game
 
@@ -70,7 +73,8 @@ void move_snake()
         {
             snake.length++;
         }
-
+        score += countdown_seconds;
+        countdown_seconds += 15;
         score += 10;
     }
 }
