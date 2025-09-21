@@ -204,9 +204,7 @@ void updater()
                 countdown_seconds -= 25;
             }
             if (game_speed > 30) {
-                _disable();
                 game_speed -= 10;
-                _enable();
             }
         }
         draw_game_elements(); // Draw the snake, food, and score

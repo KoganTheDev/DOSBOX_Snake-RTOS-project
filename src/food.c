@@ -5,8 +5,6 @@
 #include "game_m~1.h"
 
 int food_eaten = 0;
-//extern int level;
-
 POSITION food;
 
 // Structure to hold apple data for different levels

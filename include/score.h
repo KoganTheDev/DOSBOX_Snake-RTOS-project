@@ -6,7 +6,4 @@
 
 extern int score; // Player's score
 
-void add_to_score(int to_add);
-
-
 #endif
