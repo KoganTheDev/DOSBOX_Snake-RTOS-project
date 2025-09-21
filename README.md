@@ -41,9 +41,9 @@ The game includes:
   - [🚀 How to Play](#-how-to-play)
   - [🛠️ Tech Stack](#️-tech-stack)
   - [🚧 Getting Started](#-getting-started)
-  - [🖼️ Screenshots](#️-screenshots)
+  - [🖼️ Screenshots](#-screenshots)
   - [📂 Module Documentation](#-module-documentation)
-  - [👨‍💻 authors](#-authors)
+  - [👨‍💻 Authors](#-authors)
 
 ---
 
