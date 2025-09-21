@@ -52,4 +52,3 @@ void receiver();
 void updater();
 
 #endif
-

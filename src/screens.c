@@ -46,34 +46,34 @@ void print_game_over_screen()
     clrscr();
 
     // Personalized message
-    if (score >= 300) {
+    if (score >= 2000) {
         message = "You're a master of the serpent! A true snake charmer!\n";
     }
-    else if (score >= 270) {
+    else if (score >= 1800) {
         message = "Absolutely incredible! You've reached the top tiers!\n";
     }
-    else if (score >= 240) {
+    else if (score >= 1500) {
         message = "A legend in the making! Unstoppable!\n";
     }
-    else if (score >= 210) {
+    else if (score >= 1200) {
         message = "Epic! You are a master of the grid!\n";
     }
-    else if (score >= 180) {
+    else if (score >= 900) {
         message = "Phenomenal! Your reflexes are unmatched!\n";
     }
-    else if (score >= 150) {
+    else if (score >= 600) {
         message = "A solid performance! Well done!\n";
     }
-    else if (score >= 120) {
+    else if (score >= 500) {
         message = "You've got the hang of it now! Keep going!\n";
     }
-    else if (score >= 90) {
+    else if (score >= 400) {
         message = "That's a great run! Not bad at all!\n";
     }
-    else if (score >= 60) {
+    else if (score >= 250) {
         message = "Good effort! You're getting better every time.\n";
     }
-    else if (score >= 30) {
+    else if (score >= 100) {
         message = "Keep slithering! You'll get there.\n";
     }
     else {

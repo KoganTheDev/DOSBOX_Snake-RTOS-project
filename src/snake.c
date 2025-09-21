@@ -4,6 +4,7 @@
 #include "food.h"
 #include "score.h"
 #include "music.h"
+#include "clock.h"
 
 SNAKE snake; // Global struct for the snake in the game
 
@@ -71,7 +72,9 @@ void move_snake()
             snake.length++;
         }
 
+        score += countdown_seconds;
         score += 10;
+        countdown_seconds += 15;
     }
 }
 
@@ -81,7 +84,6 @@ void update_snake_direction()
     {
         int new_direction = ch_arr[front++];
 
-        // TODO: Cause GAME OVER through here if the direction is oposite
         // Ensure the new direction is not directly opposite to the current direction
         if ((new_direction == UP_ARROW && snake.direction != DOWN_ARROW) ||
             (new_direction == DOWN_ARROW && snake.direction != UP_ARROW) ||

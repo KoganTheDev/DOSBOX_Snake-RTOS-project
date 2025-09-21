@@ -185,7 +185,7 @@ void updater()
     if (is_snake_on_border() ||
         snake_self_collision() ||
         is_snake_on_wall() ||
-        get_remaining_time() == -1) // TODO: Change to "" == 0 to cause game over due to time out
+        get_remaining_time() == 0)
     {
         delay(300); // Allows the player to understand the cause of the problem
         game_over = 1;
@@ -196,6 +196,19 @@ void updater()
     if (!game_over)
     {
         clear_display_draft(); // Clear the display draft before drawing
+        if (is_level_up_timer()) {
+            if ((countdown_seconds - 30) < 15) {
+                countdown_seconds = 15;
+            }
+            else {
+                countdown_seconds -= 25;
+            }
+            if (game_speed > 30) {
+                _disable();
+                game_speed -= 10;
+                _enable();
+            }
+        }
         draw_game_elements(); // Draw the snake, food, and score
         color_display_draft(); // Add colors by inserting them to "the "display_colors" array, which then will be used to color the game screen
         update_display_buffer(); // Copy the draft to the main display buffer

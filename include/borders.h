@@ -18,5 +18,4 @@ void initialize_borders(); // Fills the borders with characters
 void draw_borders(); // Insert the borders into the display array
 int is_snake_on_border(); // If collision detected, returns 1, else 0
 
-
 #endif

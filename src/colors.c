@@ -1,7 +1,5 @@
 #include "colors.h"
 
-// TODO: BEFORE SUBMITING MAKE SURE THE GAME IS COLORED CORRECTLY
-
 char display_colors[DISPLAY_ROWS][DISPLAY_COLS];
 
 const color_set game_color_sets[10] =
