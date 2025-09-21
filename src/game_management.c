@@ -101,7 +101,7 @@ void draw_game_elements()
     remaining_time = get_remaining_time();
 
     // Draw the score at the top-left corner
-    sprintf(buffer, "Level: %d | Score %d | Time %d", level, score, remaining_time);
+    sprintf(buffer, "Level: %d | Food Eaten %d | Score %d | Time %d", level, food_eaten, score, remaining_time);
     for (i = 0; buffer[i] != '\0'; i++)
     {
         display_draft[0][i] = buffer[i];
