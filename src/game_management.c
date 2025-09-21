@@ -8,7 +8,6 @@
 #include "clock.h"
 #include "wall.h"
 #include "colors.h"
-#include <dos.h>
 
 char display[DISPLAY_ROWS * DISPLAY_COLS + DISPLAY_ROWS + 1];
 char display_draft[DISPLAY_ROWS][DISPLAY_COLS];
@@ -102,7 +101,7 @@ void draw_game_elements()
     remaining_time = get_remaining_time();
 
     // Draw the score at the top-left corner
-    sprintf(buffer, "Level: %d | Score %d | Time %d | Food %d", level, score, remaining_time, food_eaten);
+    sprintf(buffer, "Level: %d | Score %d | Time %d", level, score, remaining_time);
     for (i = 0; buffer[i] != '\0'; i++)
     {
         display_draft[0][i] = buffer[i];
@@ -197,19 +196,6 @@ void updater()
     if (!game_over)
     {
         clear_display_draft(); // Clear the display draft before drawing
-        if (is_level_up_timer()) {
-            if ((countdown_seconds - 30) < 15) {
-                countdown_seconds = 15;
-            }
-            else {
-                countdown_seconds -= 25;
-            }
-            if (game_speed > 30) {
-                _disable();
-                game_speed -= 10;
-                _enable();
-            }
-        }
         draw_game_elements(); // Draw the snake, food, and score
         color_display_draft(); // Add colors by inserting them to "the "display_colors" array, which then will be used to color the game screen
         update_display_buffer(); // Copy the draft to the main display buffer
@@ -220,18 +206,4 @@ void updater()
     {
         print_game_over_screen();
     }
-
-        if (is_level_up_timer()) {
-            if (countdown_seconds -= 50 < 15) {
-                countdown_seconds = 15;
-            }
-            else {
-                countdown_seconds -= 50;
-            }
-            if (game_speed > 30) {
-                _disable();
-                game_speed -= 30;
-                _enable();
-            }
-        }
 }

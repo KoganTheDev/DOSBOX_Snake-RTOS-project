@@ -7,7 +7,7 @@ void interrupt (*old_clock_handler)();
 volatile int countdown_seconds = 0;
 volatile int countdown_running = 0;
 
-// TODO: When creating the difficulty for the game, use a level struct that will contain the time needed for the current level
+// TODO: When creating the dificulty for the game, use a level struct that will contain the time needed for the current level
 int level_time = 60; // Default time for the level (e.g. 60 seconds)
 
 // Counter for PIT ticks to track one second
