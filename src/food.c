@@ -45,20 +45,33 @@ void spawn_food()
     int i;
     int on_snake = 0;
     AppleType *current_apple = get_current_apple_type();
-
+    unsigned int rx, ry;
+   
     // Define the valid range for X and Y coordinates based on the limits enum
     int min_x = LEFT_LIMIT;
     int max_x = RIGHT_LIMIT;
     int min_y = UPPER_LIMIT;
     int max_y = LOWER_LIMIT;
 
+    // Add some time-based entropy
+    static unsigned int spawn_counter = 0;
+    spawn_counter++;
+    
     do
     {
         on_snake = 0;
 
+        // Use multiple random values for better distribution
+        rx = rand();
+        ry = rand();
+        
+        // XOR with spawn counter for additional entropy
+        rx ^= spawn_counter;
+        ry ^= (spawn_counter << 8);
+
         // Adjust range so apple always fits on screen
-        food.x = min_x + rand() % (max_x - min_x - current_apple->width);
-        food.y = min_y + rand() % (max_y - min_y - current_apple->height);
+        food.x = min_x + (rx % (max_x - min_x - current_apple->width));
+        food.y = min_y + (ry % (max_y - min_y - current_apple->height));
 
         // Ensure the apple does not spawn on the snake
         for (i = 0; i < snake.length; i++)
@@ -71,6 +84,12 @@ void spawn_food()
                 on_snake = 1;
                 break;
             }
+        }
+
+        // Add additional randomness if we need to retry
+        if (on_snake) {
+            // Mix in some more entropy
+            rand();
         }
     } while (on_snake);
 

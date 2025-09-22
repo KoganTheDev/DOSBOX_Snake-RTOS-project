@@ -8,6 +8,7 @@
 #include "clock.h"
 #include "wall.h"
 #include "colors.h"
+#include <time.h>
 
 char display[DISPLAY_ROWS * DISPLAY_COLS + DISPLAY_ROWS + 1];
 char display_draft[DISPLAY_ROWS][DISPLAY_COLS];
@@ -92,10 +93,10 @@ void draw_game_elements()
     int y;
     int i;
     
-    draw_borders();
     draw_snake();
     draw_food();     // Draw the food
     draw_wall();     // Draw the Wall object
+    draw_borders();
 
     // Calculate and display the remainng time
     remaining_time = get_remaining_time();
@@ -157,6 +158,9 @@ void updater()
     // Initial setup for the first run of the game.
     if (initial_run == 1)
     {
+        // Initialize random seed using current time
+        srand((unsigned)time(NULL));
+        
         initialize_borders();
         initialize_snake();
         spawn_food(); // Spawn the first food item, uses srand seed
