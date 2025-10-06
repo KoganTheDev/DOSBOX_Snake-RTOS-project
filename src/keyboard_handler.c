@@ -37,7 +37,9 @@ Skip1:;
         && (tail < ARR_SIZE - 1))
     {
         _disable(); // Disable interrupts to prevent a race condition with the main loop
-        entered_ascii_codes[++tail] = scan_code; // Store the scan code directly
+        if(scan_code != entered_ascii_codes[tail]){
+            entered_ascii_codes[++tail] = scan_code; // Store the scan code directly
+        }
         _enable(); // Re-enable interrupts
     }
     if (scan_code == ESCAPE_KEY)
