@@ -41,7 +41,6 @@ The game includes:
   - [🚀 How to Play](#-how-to-play)
   - [🛠️ Tech Stack](#️-tech-stack)
   - [🚧 Getting Started](#-getting-started)
-  - [🖼️ Screenshots](#-screenshots)
   - [📂 Module Documentation](#-module-documentation)
   - [👨‍💻 Authors](#-authors)
 
@@ -77,37 +76,6 @@ git clone https://github.com/KoganTheDev/DOSBOX_Snake-RTOS-project.git
 
 ### 2. Open in Turbo C (or DOSBox-X with TCC) and run the batch file from src which runs the game
 ````
-
----
-
-## 🖼️ Screenshots
-
-<table width="100%">
-  <tr>
-    <td align="center" width="50%">
-      <img src="https://github.com/user-attachments/assets/1" width="90%"/>
-      <br/>
-      <b>Welcome Screen</b>
-    </td>
-    <td align="center" width="50%">
-      <img src="https://github.com/user-attachments/assets/2" width="90%"/>
-      <br/>
-      <b>Snake Eating Food</b>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="50%">
-      <img src="https://github.com/user-attachments/assets/3" width="90%"/>
-      <br/>
-      <b>Game Over Screen</b>
-    </td>
-    <td align="center" width="50%">
-      <img src="https://github.com/user-attachments/assets/4" width="90%"/>
-      <br/>
-      <b>Walls & Obstacles</b>
-    </td>
-  </tr>
-</table>
 
 ---
 
